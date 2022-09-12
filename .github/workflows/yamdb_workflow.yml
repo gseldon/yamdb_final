@@ -45,7 +45,7 @@ jobs:
           context: ${{ env.PROJECT_FOLDER }}/.
           file: ${{ env.PROJECT_FOLDER }}/Dockerfile
           push: true
-          tags: ${{ github.repository_owner }}/${{ github.repository }}:latest
+          tags: $GITHUB_REPOSITORY:latest
   # deploy:
   #   runs-on: ubuntu-latest
   #   needs: build_and_push_to_docker_hub
