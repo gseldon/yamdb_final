@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:9.4-alpine
+    image: postgres:latest
     container_name: yamdb-postgres
     volumes:
       - db_data:/var/lib/postgresql/data/
@@ -20,7 +20,7 @@ services:
     networks:
       - backend
   web:
-    image: gseldon/yamdb-web:0.2
+    image:  gseldon/yamdb_final
     restart: always
     volumes:
       - web_static:/app/static
