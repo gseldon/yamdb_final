@@ -58,7 +58,7 @@ jobs:
   #       key: ${{ secrets.SSH_KEY }}
   #       script: |
   #         # Выполняет pull образа с DockerHub
-  #         sudo docker pull $GITHUB_REPOSITORY:latest
+  #         sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
   #         #остановка всех контейнеров
   #         sudo docker stop $(sudo docker ps -a -q)
-  #         sudo docker run --rm -d -p 5000:5000 $GITHUB_REPOSITORY:latest
+  #         sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
