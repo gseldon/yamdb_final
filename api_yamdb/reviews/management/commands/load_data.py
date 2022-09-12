@@ -2,10 +2,8 @@ import os
 from csv import DictReader
 
 from django.core.management import BaseCommand
-from reviews.models import (
-    Categories, Comments, Genres,
-    GenreTitle, Review, Title, User
-)
+from reviews.models import (Categories, Comments, Genres, GenreTitle, Review,
+                            Title, User)
 
 DATA_DIR = 'static/data'
 DATA_PATCH = {
