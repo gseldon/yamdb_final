@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:9.4-alpine
+    container_name: yamdb-postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+    env_file:
+      - ./.env
+    restart: always
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+  web:
+    image: gseldon/yamdb-web:0.2
+    restart: always
+    volumes:
+      - web_static:/app/static
+      - web_media:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./.env
+    networks:
+      - frontend
+      - backend
+  proxy:
+    image: nginx:1.23
+    container_name: yamdb-proxy
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    cap_drop:
+      - ALL
+    volumes:
+      - web_static:/var/html/static:ro
+      - web_media:/app/media:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+
+volumes:
+  db_data:
+  web_static:
+  web_media:
+
+networks:
+  frontend:
+  backend:
