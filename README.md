@@ -1,4 +1,5 @@
-![workflow](https://github.com/gseldon/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
+![workflow](https://github.com/gseldon/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)  
+host: 84.201.156.130
 
 ## Описание
 
@@ -6,10 +7,10 @@
 
 ### Алгоритм регистрации пользователей
 
-1. Пользователь отправляет POST-запрос на добавление нового пользователя с параметрами email и username на эндпоинт ```/api/v1/auth/signup/```.
+1. Пользователь отправляет POST-запрос на добавление нового пользователя с параметрами email и username на эндпоинт `/api/v1/auth/signup/`.
 2. YaMDB отправляет письмо с кодом подтверждения (confirmation_code) на адрес email.
-3. Пользователь отправляет POST-запрос с параметрами username и confirmation_code на эндпоинт ```/api/v1/auth/token/```, в ответе на запрос ему приходит token (JWT-токен).
-4. При желании пользователь отправляет PATCH-запрос на эндпоинт ```/api/v1/users/me/``` и заполняет поля в своём профайле (описание полей — в документации).
+3. Пользователь отправляет POST-запрос с параметрами username и confirmation_code на эндпоинт `/api/v1/auth/token/`, в ответе на запрос ему приходит token (JWT-токен).
+4. При желании пользователь отправляет PATCH-запрос на эндпоинт `/api/v1/users/me/` и заполняет поля в своём профайле (описание полей — в документации).
 
 ### Пользовательские роли
 
@@ -32,15 +33,15 @@
 
 ## Подготовка ВМ на яндексе.
 
-1. Используя [проект](https://github.com/gseldon/yc-terraform-one-vm-static-ip) подготовить ВМ на ВМ для развертывания.
-1. Перенести на ВМ файлы.
+1. Используя [проект](https://github.com/gseldon/yc-terraform-one-vm-static-ip) подготовить ВМ для развертывания.
+1. Перенести на ВМ файлы:
 
 ```sh
 scp -r infra/* ssh  your_login@static_ip
 ```
 
 ## Запуск проекта
-1. Внести актуальные данные в ```Setting``` -> ```Actions secrets```
+1. Внести актуальные данные в `Setting` -> `Actions secrets`
 1. Проект запускается через GitHub Action. Проверить можно во вкладке Action
 
 ##

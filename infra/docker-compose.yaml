@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:latest
+    image: postgres::9.4-alpine
     container_name: yamdb-postgres
     volumes:
       - db_data:/var/lib/postgresql/data/
